@@ -50,6 +50,7 @@ SSH_ASKPASS=/opt/resource/askpass.sh DISPLAY= ssh-add ~/.ssh/server_key 1>&2 >/d
 
 if [ $DISABLE_VERSION_PATH -eq 0 ]
 then
+    # any version is already rolled in
     SRC_DIR=$BASE_DIR
 else
     SRC_DIR=$BASE_DIR/$VERSION
@@ -57,7 +58,7 @@ fi
 
 echo $SRC_DIR 1>&2
 
-if [ -z "$VERSION" ]; then
+if [ -z "$VERSION" && $DISABLE_VERSION_PATH -eq 1 ]; then
   echo "ERROR Version specification $VERSION invalid!" 1>&2
   exit 1
 else
