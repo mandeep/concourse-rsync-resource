@@ -58,7 +58,7 @@ fi
 echo $SRC_DIR 1>&2
 
 if [ -z "$VERSION" ]; then
-  echo "ERROR Version specifiation $VERSION invalid!"
+  echo "ERROR Version specification $VERSION invalid!" 1>&2
   exit 1
 else
   if (ssh -t -i ~/.ssh/server_key -p $PORT $USER@$SERVER '[ -d $SRC_DIR ]' ); then
@@ -74,7 +74,7 @@ else
       exit 1
     fi
   else
-    echo "Version $VERSION no longer available in $BASE_DIR"
+    echo "Version $VERSION no longer available in $BASE_DIR" 1>&2
     exit 1
   fi
 fi
