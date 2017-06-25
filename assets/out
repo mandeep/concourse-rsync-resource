@@ -62,9 +62,10 @@ eval $(ssh-agent) 1>&2 2>/dev/null
 SSH_ASKPASS=/opt/resource/askpass.sh DISPLAY= ssh-add ~/.ssh/server_key 1>&2 2>/dev/null
 
 VERSION_STRING="$BUILD_PIPELINE_NAME-$BUILD_ID"
-echo $VERSION_STRING 1>&2
+echo "DEBUG: version string is $VERSION_STRING" 1>&2
 
 MD5_STRING=`echo $VERSION_STRING | $MD5_TOOL | cut -d ' ' -f 1 `
+echo "DEBUG: MD5 of version string is $MD5_STRING" 1>&2
 if [ $? -eq 0 ]; then
   echo $MD5_STRING 1>&2
   
@@ -95,6 +96,7 @@ if [ $? -eq 0 ]; then
             if [ $REPORTED_VERSION -eq 0 ]
             then
                 OUTPUT_STRING="{ \"version\": { \"ref\": \"$MD5_STRING\"} }"
+                echo "DEBUG: outputting $OUTPUT_STRING to concourse" 1>&2
                 echo $OUTPUT_STRING
                 REPORTED_VERSION=1
             fi
