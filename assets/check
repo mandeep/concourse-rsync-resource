@@ -40,7 +40,7 @@ then
     then
         DIR=${BASE_DIR##*/}
         echo $DIR 1>&2
-        REFS="{ \"ref\": \"$DIR\" }"
+        REFS="{ \"ref\": \"$DIR$(date +%s)\" }"
     fi
 else
     echo "looking for topmost changed dir, ideally matching $VERSION" 1>&2
