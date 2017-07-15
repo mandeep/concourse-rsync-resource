@@ -40,7 +40,7 @@ then
     then
         DIR=${BASE_DIR##*/}
         echo $DIR 1>&2
-        REFS="{ \"ref\": \"$DIR$(date +%s)\" }"
+        REFS="{ \"ref\": \"$(ssh -i ~/.ssh/server_key \"find $BASE_DIR -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -f1 -d' '\")\" }"
     fi
 else
     echo "looking for topmost changed dir, ideally matching $VERSION" 1>&2
