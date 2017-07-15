@@ -9,12 +9,6 @@ echo $BUILD_PIPELINE_NAME 1>&2
 echo $ATC_EXTERNAL_URL 1>&2
 
 PLATFORM=`uname`
-MD5_TOOL="md5sum"
-if [ $PLATFORM = "Darwin" ]; then
-  MD5_TOOL="md5"
-fi
-
-echo $MD5_TOOL 1>&2
 
 SCRIPT_INPUT='/tmp/input'
 cat > $SCRIPT_INPUT <&0 # STDIN params
@@ -67,7 +61,8 @@ else
     echo $RSYNC_CMD  1>&2
     eval $RSYNC_CMD  1>&2
     if [ $? -eq 0 ]; then
-        OUTPUT_STRING="{ \"version\": { \"ref\": \"$MD5_STRING\"} }"
+        TIMESTAMP=$(find $DEST_DIR -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -f1 -d'.')
+        OUTPUT_STRING="{ \"version\": { \"ref\": \"$TIMESTAMP\"} }"
         echo $OUTPUT_STRING
         exit 0
     else
