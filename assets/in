@@ -61,7 +61,7 @@ else
     echo $RSYNC_CMD  1>&2
     eval $RSYNC_CMD  1>&2
     if [ $? -eq 0 ]; then
-        TIMESTAMP=$(find $DEST_DIR -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -f1 -d'.')
+        TIMESTAMP=$(find $DEST_DIR -type f -exec stat -c "%Y" {} \; | sort -n | tail -1)
         OUTPUT_STRING="{ \"version\": { \"ref\": \"$TIMESTAMP\"} }"
         echo $OUTPUT_STRING
         exit 0

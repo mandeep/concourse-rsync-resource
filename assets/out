@@ -61,7 +61,7 @@ chmod -R 600 ~/.ssh
 eval $(ssh-agent) 1>&2 2>/dev/null
 SSH_ASKPASS=/opt/resource/askpass.sh DISPLAY= ssh-add ~/.ssh/server_key 1>&2 2>/dev/null
 
-TIMESTAMP=$(find $BASE_DIR -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -f1 -d'.')
+TIMESTAMP=$(find $BASE_DIR -type f -exec stat -c "%Y" {} \; | sort -n | tail -1)
 echo "DEBUG: Timestamp of latest modified file is $TIMESTAMP" 1>&2
 
 # Create the new directory for this build
