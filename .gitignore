@@ -1,3 +1,3 @@
 *.yml
 *.yaml
-*.DS_Store
+.DS_Store
