@@ -52,7 +52,7 @@ fi
 
 echo $SRC_DIR 1>&2
 
-if [ -z "$VERSION" ] && [ $DISABLE_VERSION_PATH -eq 1 ]; then
+if [ -z "$VERSION" && $DISABLE_VERSION_PATH -eq 1 ]; then
   echo "ERROR Version specification $VERSION invalid!" 1>&2
   exit 1
 else
